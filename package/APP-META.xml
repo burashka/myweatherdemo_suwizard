@@ -1,0 +1,61 @@
+<application version="2.0" xmlns="http://aps-standard.org/ns/2">
+
+    <id>http://myweatherdemo.com/suwizard</id>
+    <name>myweatherdemo-suwizard</name>
+    <version>1.0</version>
+    <release>1</release>
+    <presentation>
+        <navigation id="ccp" label="MyWeatherDemo">
+            <var name="subscription_service" type-id="http://myweatherdemo.com/suwizard/subscription_service/1.0"/>
+            <plugs-to id="http://www.aps-standard.org/ui/service"/>
+            <item id="users" label="Users">
+                <view id="users" label="Users">
+                    <view id="user.add" label="Add New User">
+                        <controls>
+                            <cancel/>
+                            <submit/>
+                        </controls>
+                    </view>
+                    <view id="user.edit" label="Edit User">
+                        <var name="user" type-id="http://myweatherdemo.com/suwizard/user/1.0"/>
+                        <controls>
+                            <cancel/>
+                            <submit/>
+                        </controls>
+                    </view>
+                </view>
+            </item>
+        </navigation>
+
+        <navigation id="suwizard">
+            <view id="suwizard.new" label="New VPS">
+                <plugs-to id="http://www.aps-standard.org/ui/service/suwizard.new" />
+            </view>
+            <view id="suwizard.overview" label="VPS Overview">
+                <plugs-to id="http://www.aps-standard.org/ui/service/suwizard.overview" />
+            </view>
+            <view id="suservice.view" label="Service View">
+                <plugs-to id="http://www.aps-standard.org/ui/service/suservice.view" />
+            </view>
+        </navigation>
+
+    </presentation>
+
+    <license-agreement>
+        <free/>
+        <text>
+            <name>End-User License Agreement</name>
+            <url>http://opensource.org/licenses/bsd-license</url>
+        </text>
+    </license-agreement>
+
+    <service id="application">
+        <code engine="php" path="scripts/application.php"/>
+    </service>
+    <service id="subscription_service">
+        <code engine="php" path="scripts/subscription_service.php"/>
+    </service>
+    <service id="user">
+        <code engine="php" path="scripts/user.php"/>
+    </service>
+</application>

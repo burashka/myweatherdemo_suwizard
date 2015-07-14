@@ -1,0 +1,16 @@
+{
+    "aps": {
+        "type": "http://myweatherdemo.com/suwizard/user/1.0"
+    },
+    "city": "",
+    "country": "",
+    "username": "",
+    "password": "",
+    "include_humidity": true,
+    "units": "celsius",
+    "service_user":{
+        "aps":{
+            "id": ""
+        }
+    }
+}
