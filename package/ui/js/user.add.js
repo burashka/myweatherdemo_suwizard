@@ -18,10 +18,12 @@ require([
 
     when(getUnassignedServiceUsers(), function(service_users) {
 
-        user.username = service_users.users[0].label;
-        user.service_user.aps.id = service_users.users[0].id;
+        console.log(service_users);
 
-        var userMemory = new Memory({ data: service_users.users });
+        user.username = service_users.users[0].login;
+        user.service_user.aps.id = service_users.users[0].aps.id;
+
+        var userMemory = new Memory({ data: service_users.users, idProperty: "aps.id" });
 
         var widgets =
             ["aps/PageContainer", {id: "top_container"}, [
@@ -29,8 +31,7 @@ require([
                     value: "Here you can create a user in MyWeatherDemo."
                 }],
                 ["aps/FieldSet", {title: true}, [
-                    ["aps/Select", {title: "User", store: userMemory, value: at(user.service_user.aps, "id")}],
-                    ["aps/Output", {label: "Username", value: at(user, "username")}],
+                    ["aps/Select", {title: "User", labelAttr: "login", store: userMemory, value: at(user.service_user.aps, "id")}],
                     ["aps/TextBox", {label: "Password", value: at(user, "password"), required: true}],
                     ["aps/TextBox", {label: "City", value: at(user, "city"), required: true}],
                     ["aps/TextBox", {label: "Country", value: at(user, "country"), required: true}],
@@ -64,3 +65,4 @@ require([
         });
     };
 });
+

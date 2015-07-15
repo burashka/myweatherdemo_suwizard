@@ -16,7 +16,7 @@ require([
         var widgets =
             ["aps/PageContainer", {id: "top_container"}, [
                 ["aps/Output", {
-                    value: "Here you can create a user in MyWeatherDemo."
+                    value: "Here you can edit user information in MyWeatherDemo."
                 }],
                 ["aps/FieldSet", {title: true}, [
                     ["aps/Output", {label: "Username", value: at(user, "username")}],

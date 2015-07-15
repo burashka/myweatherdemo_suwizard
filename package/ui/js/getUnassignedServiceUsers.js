@@ -1,6 +1,6 @@
 define([
-	"aps/ResourceStore", 
-	"dojo/Deferred", 
+	"aps/ResourceStore",
+	"dojo/Deferred",
 	"dojo/promise/all"
 ], function (ResourceStore, Deferred, all) {
 	return function(){
@@ -24,16 +24,15 @@ define([
 						return mwd_user.username == user.login;
 					});
 
-					// adding to userList only those users that do not have MyWeatherDemo assigned
+					// adding to 'users' only those users that do not have MyWeatherDemo assigned
 					if(match.length){
 				            console.log("this user already has mwd assigned");
 				            return false;
 				        }
 				        return true;
-				});
+				})
 			});
 		});
-		
 		return deferred;
 	};
 });

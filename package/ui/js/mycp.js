@@ -4,17 +4,17 @@ require([
     "aps/ready!"
 ], function (at, load) {
 
-    // aps.context.params contains 'objects' that we passed from suwizard.new 
-    var user = aps.context.params.objects[0];
+    // 'user' variable is defined in APP-META.xml for this view
+    var user = aps.context.vars.user;
 
     var widgets =
         ["aps/PageContainer", {id: "top_container"}, [
             ["aps/Output", {
-                value: "Here you can overview user settings."
+                content: "Congratulations! A user was created for you in MyWeatherDemo.<br><br>You can now go to <a href='http://www.myweatherdemo.com/login' target='_blank'>http://www.myweatherdemo.com/login</a> to login using username <b>${username}</b> and password <b>${password}</b>.<br><br>To see current weather for your city click on 'Weather Information' tab once logged in.",
+                username: at(user, "username"),
+                password: at(user, "password")
             }],
             ["aps/FieldSet", {title: true}, [
-                ["aps/Output", {label: "Username", value: at(user, "username")}],
-                ["aps/Output", {label: "Password", value: at(user, "password")}],
                 ["aps/Output", {label: "City", value: at(user, "city")}],
                 ["aps/Output", {label: "Country", value: at(user, "country")}],
                 ["aps/Output", {label: "Units of Measurement", value: at(user, "units")}],

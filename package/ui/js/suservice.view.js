@@ -5,9 +5,11 @@ require([
     "aps/ready!"
 ], function (xhr, at, load) {
 
+    // getting MyWeatherDemo user linked to selected service user (it's available in aps.context.params for this view)
     xhr.get("/aps/2/resources?implementing(http://myweatherdemo.com/suwizard/user/1.0),like(username," + aps.context.params.user.login + ")").then(
         function(users) {
 
+        // since email address is unique in OSA we can be sure that returned array will have only one object
         var user = users[0];
 
         var widgets =

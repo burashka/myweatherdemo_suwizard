@@ -8,6 +8,7 @@ require([
 
     var user = JSON.parse(newUser);
 
+    // information about service user is available in aps.context.param
     user.username = aps.context.params.user.login;
 
     var widgets =
@@ -39,6 +40,7 @@ require([
                 aps.apsc.cancelProcessing();
                 return;
             }
+        // we need to pass the model constructed from widgets + name of the link to service user defined in user.php as userAttr
         aps.apsc.next({ objects: [(user)], userAttr: "service_user" });
     };
 });
