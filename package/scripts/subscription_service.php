@@ -1,6 +1,7 @@
 <?php
 
-    require "aps/2/runtime.php";    
+    require "aps/2/runtime.php";
+    require_once("utils.php");   
 
     /**
     * @type("http://myweatherdemo.com/suwizard/subscription_service/1.0")
@@ -36,6 +37,12 @@
 
         /**
          * @type(string)
+         * @title("Company authorization token")
+         */
+        public $company_token;
+
+        /**
+         * @type(string)
          * @title("Login to MyWeatherDemo interface")
          */
         public $username;
@@ -46,62 +53,30 @@
          */
         public $password;
 
-        // MyWeatherDemo API URL to work with companies
-        const BASE_URL = "http://www.myweatherdemo.com/api/company/";
-        
-        // provision() method is executed when resource is created (POST)
+         const BASE_URL = "http://www.myweatherdemo.com/api/company/";
+
         public function provision(){
-            
-            // to create a company in external service we need to pass country, city and name of the company
-            // we can get them from linked core/account resource
+
             $request = array(
                     'country' => $this->account->addressPostal->countryName,
                     'city' => $this->account->addressPostal->locality,
                     'name' => $this->account->companyName
             );
-            
-            $response = $this->send_curl_request('POST', self::BASE_URL, $request);
 
-            // need to save company_id in APSC, going to use that later to delete a resource in unprovision()
-            // username and password will be used to login to MyWeatherDemo web interface
+            $response = send_curl_request(true, $this->application->provider_token, 'POST', self::BASE_URL, $request);
+
             $this->company_id = $response->{'id'};
+            $this->company_token = $response->{'token'};
             $this->username = $response->{'username'};
             $this->password = $response->{'password'};
+
         }
 
-        // unprovision() method is executed when resource is removed (DELETE)
         public function unprovision(){
 
-            // need to pass company_id to indicate which company we want to delete
             $url = self::BASE_URL . $this->company_id;
-            $response = $this->send_curl_request('DELETE', $url);
-        }
+            $response = send_curl_request(true, $this->application->provider_token, 'DELETE', $url);
 
-        // you can add your own methods as well, don't forget to make them private
-        private function send_curl_request($verb, $url, $payload = ''){
-
-            $token = $this->application->provider_token;
-
-            $headers = array(
-                    'Content-type: application/json',
-                    'x-provider-token: '. $token
-            );
-
-            $ch = curl_init();
-            
-            curl_setopt_array($ch, array(
-            CURLOPT_URL            => $url,
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_CUSTOMREQUEST => $verb,
-            CURLOPT_HTTPHEADER => $headers,
-            CURLOPT_POSTFIELDS => json_encode($payload)
-            ));
-            
-            $response = json_decode(curl_exec($ch));
-            
-            curl_close($ch);
-
-            return $response;
         }
     }
 ?>

@@ -14,14 +14,16 @@ require([
     var widgets =
         ["aps/PageContainer", {id: "top_container"}, [
             ["aps/Output", {
+                id: "description",
                 value: "Here you can create a user in MyWeatherDemo."
             }],
             ["aps/FieldSet", {title: true}, [
-                ["aps/Output", {label: "Username", value: at(user, "username")}],
-                ["aps/TextBox", {label: "Password", value: at(user, "password"), required: true}],
-                ["aps/TextBox", {label: "City", value: at(user, "city"), required: true}],
-                ["aps/TextBox", {label: "Country", value: at(user, "country"), required: true}],
+                ["aps/Output", {id: "username", label: "Username", value: at(user, "username")}],
+                ["aps/Password", {id: "password", label: "Password", value: at(user, "password"), required: true, showStrengthIndicator: true}],
+                ["aps/TextBox", {id: "city", label: "City", value: at(user, "city"), required: true}],
+                ["aps/TextBox", {id: "country", label: "Country", value: at(user, "country"), required: true}],
                 ["aps/Select", {
+                    id: "units",
                     title: "System of measurement",
                     value: at(user, "units"),
                     options: [
@@ -29,7 +31,7 @@ require([
                         { label: "Celsius", value: "celsius", selected: true}
                     ]
                 }],
-                ["aps/CheckBox", {label: "Do you want to see humidity?", checked: at(user, "include_humidity")}]
+                ["aps/CheckBox", {id: "show_humidity", label: "Do you want to see humidity?", checked: at(user, "include_humidity")}]
             ]]
         ]];
     load(widgets);

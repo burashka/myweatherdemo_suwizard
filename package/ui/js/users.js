@@ -14,6 +14,7 @@ require([
         target: "/aps/2/resources/"
     });
 
+    // we have 'subscription_service' variable defined at the root of navigation tree in APP-META.xml
     var company = aps.context.vars.subscription_service;
 
     var widgets = (
@@ -43,11 +44,11 @@ require([
                 },
                 [["aps/Toolbar", [
                     ["aps/ToolbarButton", {
-                        // button will not be disabled after click
                         autoBusy: false,
                         iconClass: "sb-add-new",
                         label: "Add",
                         onClick: function() {
+                            // if there are no service users available for linking we want to show an error message on this view
                             when(getUnassignedServiceUsers(), function(users) {
                                 if (!users.users.length) {
                                     var messages = registry.byId("top_container").get("messageList");
