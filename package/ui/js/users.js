@@ -20,7 +20,7 @@ require([
     var widgets = (
         ["aps/PageContainer", {id: "top_container"}, [
             ["aps/Output", {
-                content: "Here you can give access to MyWeatherDemo to your employees.<br><br>You can see a list of users associated with your account by logging in to <a href='http://www.myweatherdemo.com/login' target='_blank'>http://www.myweatherdemo.com/login</a> using username <b>${username}</b> and password <b>${password}</b>.<br><br>PLACEHOLDER: WHERE TO SEE USERS.",
+                content: "Here you can give access to MyWeatherDemo to your employees.<br><br>You can see a list of users associated with your company by logging in to <a href='http://www.myweatherdemo.com/login' target='_blank'>http://www.myweatherdemo.com/login</a> using username <b>${username}</b> and password <b>${password}</b>.<br><br>To see current weather click on 'Weather Information' tab once logged in.",
                 username: at(company, "username"),
                 password: at(company, "password")
             }],

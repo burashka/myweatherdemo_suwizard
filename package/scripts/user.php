@@ -1,6 +1,9 @@
 <?php
+    
+    define('APS_DEVELOPMENT_MODE', true);
     require "aps/2/runtime.php";
-    require_once("utils.php");  
+    require_once("utils.php");
+
 
     /**
     * @type("http://myweatherdemo.com/suwizard/user/1.0")
