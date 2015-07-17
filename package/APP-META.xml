@@ -28,13 +28,13 @@
         </navigation>
 
         <navigation id="suwizard">
-            <view id="suwizard.new" label="New VPS">
+            <view id="suwizard.new" label="New User">
                 <plugs-to id="http://www.aps-standard.org/ui/service/suwizard.new" />
             </view>
-            <view id="suwizard.overview" label="VPS Overview">
+            <view id="suwizard.overview" label="User Overview">
                 <plugs-to id="http://www.aps-standard.org/ui/service/suwizard.overview" />
             </view>
-            <view id="suservice.view" label="Service View">
+            <view id="suservice.view" label="User View">
                 <plugs-to id="http://www.aps-standard.org/ui/service/suservice.view" />
             </view>
         </navigation>
