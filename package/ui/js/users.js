@@ -68,15 +68,15 @@ require([
                             // getting access to user selection in aps/Grid
                             var grid = registry.byId("grid");
                             var sel = grid.get("selectionArray");
-                            for (var i=0; i<sel.length; i++){
+                            sel.forEach(function(id, i){
                                 // deleting each selected city
-                                when(store.remove(sel[i]), function() {
+                                when(store.remove(id), function() {
                                     // if city was successfully removed from MyWeatherDemo: removing selection from selectionArray
                                     sel.splice(sel.indexOf(i),1);
                                     // refreshing data in a grid to not show cities which were already removed from the store
                                     grid.refresh();
                                 });
-                            };
+                            });
                         }
                     }]
                 ]]]
